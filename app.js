@@ -78,10 +78,7 @@ class Ui {
       button.addEventListener("click", (event) => {
         event.target.innerText = "In Cart";
         event.target.disabled = true;
-        // get product from products(localstorage)
         let cartItem = { ...Storage.getProduct(id), amount: 1 };
-        // console.log(cartItem);
-        // console.log("all products", allProducts);
 
         // add product to the cart
         CART = [...CART, cartItem]
@@ -105,15 +102,8 @@ class Ui {
       itemsTotal += item.amount;
     })
 
-    // can we done like this as well
-    // cart.forEach((item) => {
-    //   tempTotal += item.price * item.amount;
-    //   itemsTotal += item.amount;
-    // })
     CART_TOTAL.innerText = parseFloat(tempTotal.toFixed(2));
     CART_ITEMS.innerText = itemsTotal;
-    // can we done like this as well
-    // CART_ITEMS.innerText = cart.length; 
   }
   addCartItem(item) {
     const div = document.createElement('div');
@@ -240,7 +230,6 @@ UI.cartLogic();
   // get all products
   PRODUCTS.getProducts()
     .then((products) => {
-      console.log(products);
       UI.displayProducts(products);
       Storage.saveProducts(products);
       allProducts = products; // without local storage
@@ -248,5 +237,4 @@ UI.cartLogic();
     .then(() => {
       UI.getBagButtons();
     });
-  console.log("dom loaded")
 });
